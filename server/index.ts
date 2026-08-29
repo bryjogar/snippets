@@ -2,11 +2,12 @@ import express from 'express';
 import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { authMiddleware } from './auth.js';
+import { authMiddleware, checkAuthEnv } from './auth.js';
 import { connectDB } from './db.js';
 import snippetsRouter from './routes/snippets.js';
 
 async function main() {
+  checkAuthEnv();
   await connectDB();
 
   const app = express();

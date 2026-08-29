@@ -12,10 +12,19 @@ function headers(): Record<string, string> {
   return h;
 }
 
+export class ApiError extends Error {
+  status: number;
+  constructor(status: number, message: string) {
+    super(message);
+    this.name = 'ApiError';
+    this.status = status;
+  }
+}
+
 async function handle(res: Response) {
   if (!res.ok) {
     const body = await res.json().catch(() => ({}));
-    throw new Error(body.error || `HTTP ${res.status}`);
+    throw new ApiError(res.status, body.error || `HTTP ${res.status}`);
   }
   if (res.status === 204) return undefined;
   return res.json();

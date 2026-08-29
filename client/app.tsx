@@ -45,9 +45,13 @@ function App() {
     try {
       await listSnippets({ limit: 1 });
       setAuthed(true);
-    } catch {
+    } catch (err: any) {
       setToken(prev);
-      setAuthError('Invalid token — check and try again.');
+      if (err?.status && err.status !== 401 && err.status !== 403) {
+        setAuthError('Server error — the app couldn\'t reach the API. Check that the server and MongoDB are running.');
+      } else {
+        setAuthError('Invalid token — check and try again.');
+      }
     } finally {
       setChecking(false);
     }

@@ -23,6 +23,8 @@ docker compose up -d --build
 
 The app listens on **http://localhost:3008**. Set `AUTH_TOKEN` in `.env`; the web UI asks for the same token on first load.
 
+The server refuses to start without AUTH_TOKEN (unless NODE_ENV=development).
+
 ## Configuration
 
 | Env | Default | Purpose |
