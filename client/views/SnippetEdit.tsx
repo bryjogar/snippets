@@ -21,7 +21,6 @@ export function SnippetEdit({ id }: { id?: string }) {
   });
   const [loading, setLoading] = useState(!isNew);
   const [saving, setSaving] = useState(false);
-  const toastVal = useSignalValue(showToast);
 
   useEffect(() => {
     if (isNew) {
