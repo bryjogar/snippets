@@ -18,9 +18,9 @@ services:
       mongo:
         condition: service_healthy
     ports:
-      - "3008:3008"
+      - "${PORT:-3008}:${PORT:-3008}"
     environment:
-      - PORT=3008
+      - PORT=${PORT:-3008}
       - AUTH_TOKEN=${AUTH_TOKEN}
       - MONGO_URL=mongodb://mongo:27017
       - MONGO_DB=snippets
