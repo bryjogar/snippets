@@ -1,0 +1,11 @@
+services:
+  snippets:
+    build: .
+    container_name: snippets
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      - PORT=3008
+      - AUTH_TOKEN=${AUTH_TOKEN}
+      - MONGO_URL=mongodb://127.0.0.1:27017
+      - MONGO_DB=snippets

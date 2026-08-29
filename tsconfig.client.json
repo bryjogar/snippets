@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact",
+    "outDir": "./dist/client",
+    "rootDir": "./client",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"]
+  },
+  "include": ["client/**/*.ts", "client/**/*.tsx"],
+  "exclude": ["client/sw.ts"]
+}

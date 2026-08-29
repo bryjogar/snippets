@@ -1,0 +1,36 @@
+{
+  "name": "snippets",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:server": "esbuild server/index.ts --bundle --platform=node --target=node22 --format=esm --outfile=dist/server.js --external:mongodb --external:express --external:cors --external:zod --external:uuid --external:gray-matter",
+    "build:client": "esbuild client/app.tsx --bundle --platform=browser --target=es2022 --format=esm --jsx=automatic --jsx-import-source=preact --outfile=dist/client/app.js --loader:.css=text",
+    "build:sw": "esbuild client/sw.ts --bundle --platform=browser --target=es2022 --format=esm --outfile=dist/client/sw.js",
+    "build:copy": "sh scripts/copy-assets.sh",
+    "build": "npm run build:server && npm run build:client && npm run build:sw && npm run build:copy",
+    "dev:server": "npm run build:server -- --watch",
+    "dev:client": "npm run build:client -- --watch",
+    "dev": "npm run build:copy && concurrently \"npm:dev:server\" \"npm:dev:client\"",
+    "start": "node dist/server.js"
+  },
+  "dependencies": {
+    "@preact/signals": "^2.9.1",
+    "@preact/signals-core": "^1.8.0",
+    "cors": "^2.8.5",
+    "express": "^4.21.0",
+    "gray-matter": "^4.0.3",
+    "mongodb": "^6.9.0",
+    "preact": "^10.24.0",
+    "uuid": "^10.0.0",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/uuid": "^10.0.0",
+    "concurrently": "^9.0.0",
+    "esbuild": "^0.24.0",
+    "typescript": "^5.6.0"
+  }
+}

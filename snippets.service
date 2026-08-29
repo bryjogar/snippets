@@ -1,0 +1,18 @@
+[Unit]
+Description=Snippets PWA (Docker Compose)
+Requires=docker.service
+After=docker.service network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=true
+WorkingDirectory=/home/bryan/tools/snippets/
+ExecStart=/usr/bin/docker compose up -d --wait
+ExecStop=/usr/bin/docker compose down
+ExecStartPre=/usr/bin/docker compose pull --quiet
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=default.target
